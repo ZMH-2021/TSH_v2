@@ -1,0 +1,53 @@
+# Tracker 和 Storage 服务命令
+
+sudo /etc/init.d/fdfs_trackerd start
+sudo /etc/init.d/fdfs_storaged start
+
+sudo /etc/init.d/fdfs_trackerd stop
+sudo /etc/init.d/fdfs_storaged stop
+
+sudo /etc/init.d/fdfs_trackerd restart
+sudo /etc/init.d/fdfs_storaged restart
+
+tail -f /home/fastdfs/tracker/logs/trackerd.log
+tail -f /home/fastdfs/storage/logs/storaged.log
+
+sudo lsof -i:22122
+
+# nginx命令
+
+sudo /usr/local/nginx/sbin/nginx
+sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx -s reload
+sudo /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+# mysql命令
+sudo /etc/init.d/mysql start
+sudo /etc/init.d/mysql stop
+sudo /etc/init.d/mysql restart
+
+# redis命令
+sudo systemctl start redis
+sudo systemctl stop redis 
+sudo systemctl restart redis
+
+
+
+# 启动
+
+# 前台运行
+sudo /home/ubuntu/KVstore/build/kvstore
+sudo /home/ubuntu/TSH/src/build/bin/tc_http_server /home/ubuntu/TSH/tc_http_server.conf 
+
+
+# 后台运行
+nohup /home/ubuntu/KVstore/build/kvstore &
+nohup /home/ubuntu/TSH/src/build/bin/tc_http_server /home/ubuntu/TSH/tc_http_server.conf &
+
+# 关闭后台
+killall -9 tc_http_server
+killall -9 kvstore
+
+# 查看后台
+ps -ef | grep tc_http_server
+ps -ef | grep kvstore
